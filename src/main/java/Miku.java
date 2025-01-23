@@ -26,7 +26,6 @@ public class Miku {
                     System.out.println((i+1) + ". " + list.get(i));
                 }      
                 System.out.println(line);
-                list.clear();
             } else if (user_in.equals("bye") == false) {
                 System.out.println(line + "\nadded: " + user_in + "\n" + line);
                 list.add(user_in);
