@@ -27,23 +27,31 @@ public class Miku {
                 }      
                 System.out.println(line);
             } else if (user_in.contains("unmark ")) {
-                // get task num
-                String[] user_ins = user_in.split(" ");
-                int user_in_num = Integer.parseInt(user_ins[1]) - 1;
-                list.set(user_in_num, list.get(user_in_num).unmark());
+                try {
+                    // get task num
+                    String[] user_ins = user_in.split(" ");
+                    int user_in_num = Integer.parseInt(user_ins[1]) - 1;
+                    list.set(user_in_num, list.get(user_in_num).unmark());
 
-                // output
-                System.out.println(line + "\nOK, I've marked this task as not done yet:");
-                System.out.println("  " + list.get(user_in_num) + "\n" + line);
+                    // output
+                    System.out.println(line + "\nOK, I've marked this task as not done yet:");
+                    System.out.println("  " + list.get(user_in_num) + "\n" + line);
+                } catch (Exception e) {
+                    System.out.println(line + "\nInvalid input, format: unmark <index in list>\n" + line);
+                }
             } else if (user_in.contains("mark ")) {
-                // get task num
-                String[] user_ins = user_in.split(" ");
-                int user_in_num = Integer.parseInt(user_ins[1]) - 1;
-                list.set(user_in_num, list.get(user_in_num).mark());
+                try {
+                    // get task num
+                    String[] user_ins = user_in.split(" ");
+                    int user_in_num = Integer.parseInt(user_ins[1]) - 1;
+                    list.set(user_in_num, list.get(user_in_num).mark());
 
-                // output
-                System.out.println(line + "\nNice! I've marked this task as done:");
-                System.out.println("  " + list.get(user_in_num) + "\n" + line);
+                    // output
+                    System.out.println(line + "\nNice! I've marked this task as done:");
+                    System.out.println("  " + list.get(user_in_num) + "\n" + line);
+                } catch (Exception e) {
+                    System.out.println(line + "\nInvalid input, format: mark <index in list>\n" + line);
+                }
             } else if (user_in.contains("todo ")) {
                 // output
                 System.out.println(line + "\nGot it. I've added this task:");
