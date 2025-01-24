@@ -14,7 +14,7 @@ public class Task {
 
 
     public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
+        return (isDone ? "[X]" : "[ ]"); // mark done task with X
     }
 
     public boolean isDone() {
@@ -33,6 +33,6 @@ public class Task {
     }
     
     public String toString() {
-        return description;
+        return this.getStatusIcon() + " " + description;
     }
 }

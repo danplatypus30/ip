@@ -23,8 +23,7 @@ public class Miku {
                 // print list
                 System.out.println(line);
                 for (int i = 0; i < list.size(); i ++) {
-                    String status = "[" + list.get(i).getStatusIcon() + "]";
-                    System.out.println((i+1) + "." + status + " " + list.get(i));
+                    System.out.println((i+1) + ". " + list.get(i));
                 }      
                 System.out.println(line);
             } else if (user_in.contains("unmark ")) {
@@ -35,7 +34,7 @@ public class Miku {
 
                 // output
                 System.out.println(line + "\nOK, I've marked this task as not done yet:");
-                System.out.println("  [ ] " + list.get(user_in_num) + "\n" + line);
+                System.out.println("  " + list.get(user_in_num) + "\n" + line);
             } else if (user_in.contains("mark ")) {
                 // get task num
                 String[] user_ins = user_in.split(" ");
@@ -44,11 +43,50 @@ public class Miku {
 
                 // output
                 System.out.println(line + "\nNice! I've marked this task as done:");
-                System.out.println("  [X] " + list.get(user_in_num) + "\n" + line);
-            } else if (user_in.equals("bye") == false) {
+                System.out.println("  " + list.get(user_in_num) + "\n" + line);
+            } else if (user_in.contains("todo ")) {
+                // output
+                System.out.println(line + "\nGot it. I've added this task:");
+                ToDos td = new ToDos(user_in.substring(5));
+                System.out.println("  " + td);
+                list.add(td);
+
+                System.out.println("Now you have " + list.size() +  " tasks in the list.\n" + line);
+            } else if (user_in.contains("deadline ")) {
+                try {
+                    String[] parts = user_in.substring(9).split("/by");
+                    Deadlines dd = new Deadlines(parts[0].trim(), parts[1].trim());
+                    list.add(dd);
+
+                    // output
+                    System.out.println(line + "\nGot it. I've added this task:");
+                    System.out.println("  " + dd);
+                    System.out.println("Now you have " + list.size() +  " tasks in the list.\n" + line);
+                } catch (Exception e) {
+                    System.out.println(line + "\nInvalid input, format: deadline <event> /by <date/time>\n" + line);
+                }
+            } else if (user_in.contains("event ")) {
+                try {
+                    String[] parts = user_in.substring(6).split("/from|/to");
+                    Events ee = new Events(parts[0].trim(), parts[1].trim(), parts[2].trim());
+                    list.add(ee);
+
+                    // output
+                    System.out.println(line + "\nGot it. I've added this task:");
+                    System.out.println("  " + ee);
+                    System.out.println("Now you have " + list.size() +  " tasks in the list.\n" + line);
+                } catch (Exception e) {
+                    System.out.println(line + "\nInvalid input, format: event <event> /from <date/time> /to <date/time>\n" + line);
+                }
+            } else {
+                // invalid input
+                System.out.println(line + "\nInvalid input please enter todo, deadline or event\n" + line);
+            }
+            /*
+            else if (user_in.equals("bye") == false) {
                 System.out.println(line + "\nadded: " + user_in + "\n" + line);
                 list.add(new Task(user_in));
-            }
+            } */
         } while (user_in.equals("bye") == false);
 
 
