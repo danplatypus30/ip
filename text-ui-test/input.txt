@@ -1,0 +1,11 @@
+run 1 lap
+todo run 1 lap
+deadline play 10 matches of mlbb /by Mon 3pm
+event date with miku /from Mon 2pm
+event date with miku /from Mon 2pm /to Mon 10pm
+list
+mark 1
+unmark 1
+mark 3
+list
+bye

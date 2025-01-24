@@ -86,7 +86,7 @@ public class Miku {
                 } catch (Exception e) {
                     System.out.println(line + "\nInvalid input, format: event <event> /from <date/time> /to <date/time>\n" + line);
                 }
-            } else {
+            } else if (user_in.equals("bye") == false) {
                 // invalid input
                 System.out.println(line + "\nInvalid input please enter todo, deadline or event\n" + line);
             }
