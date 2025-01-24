@@ -52,14 +52,23 @@ public class Miku {
                 } catch (Exception e) {
                     System.out.println(line + "\nInvalid input, format: mark <index in list>\n" + line);
                 }
-            } else if (user_in.contains("todo ")) {
-                // output
-                System.out.println(line + "\nGot it. I've added this task:");
-                ToDos td = new ToDos(user_in.substring(5));
-                System.out.println("  " + td);
-                list.add(td);
+            } else if (user_in.contains("todo")) {
+                try {
+                    if (user_in.substring(4).isEmpty()) {
+                        throw new EmptyStringException("String cannot be empty");
+                    }
+                    ToDos td = new ToDos(user_in.substring(4));
+                    list.add(td);
 
-                System.out.println("Now you have " + list.size() +  " tasks in the list.\n" + line);
+                    // output
+                    System.out.println(line + "\nGot it. I've added this task:");
+                    System.out.println("  " + td);
+                    System.out.println("Now you have " + list.size() +  " tasks in the list.\n" + line);
+                } catch (EmptyStringException es) {
+                    System.out.println(line + "\n" + es.getMessage() + ", format: todo <event>\n" + line);
+                } catch (Exception e) {
+                    System.out.println(line + "\nInvalid input, format: todo <event>\n" + line);
+                }
             } else if (user_in.contains("deadline ")) {
                 try {
                     String[] parts = user_in.substring(9).split("/by");
