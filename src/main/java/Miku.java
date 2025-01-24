@@ -57,7 +57,7 @@ public class Miku {
                     if (user_in.substring(4).isEmpty()) {
                         throw new EmptyStringException("String cannot be empty");
                     }
-                    ToDos td = new ToDos(user_in.substring(4));
+                    ToDos td = new ToDos(user_in.substring(5));
                     list.add(td);
 
                     // output
@@ -95,15 +95,23 @@ public class Miku {
                 } catch (Exception e) {
                     System.out.println(line + "\nInvalid input, format: event <event> /from <date/time> /to <date/time>\n" + line);
                 }
+            } else if (user_in.contains("delete ")) {
+                try {
+                    // get task num
+                    String[] user_ins = user_in.split(" ");
+                    int user_in_num = Integer.parseInt(user_ins[1]) - 1;
+                    Task tt = list.remove(user_in_num);
+
+                    // output
+                    System.out.println(line + "\nNoted. I've removed this task:");
+                    System.out.println("  " + tt + "\nNow you have " + list.size() + " tasks in the list.\n" + line);
+                } catch (Exception e) {
+                    System.out.println(line + "\nInvalid input, format: delete <index in list>\n" + line);
+                }
             } else if (user_in.equals("bye") == false) {
                 // invalid input
                 System.out.println(line + "\nInvalid input please enter todo, deadline or event\n" + line);
             }
-            /*
-            else if (user_in.equals("bye") == false) {
-                System.out.println(line + "\nadded: " + user_in + "\n" + line);
-                list.add(new Task(user_in));
-            } */
         } while (user_in.equals("bye") == false);
 
 
