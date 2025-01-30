@@ -18,10 +18,7 @@ public class Task {
     }
 
     public boolean isDone() {
-        if (isDone) {
-            return true;
-        }
-        return false;
+        return isDone;
     }
 
     public Task mark() {
@@ -31,7 +28,16 @@ public class Task {
     public Task unmark() {
         return new Task(this.description, false);
     }
+
+    public String toFileString() {
+        int isMarked = 0;
+        if (isDone() == true) {
+            isMarked = 1;
+        }
+        return "T | " + isMarked + " | " + this.description;
+    }
     
+    @Override
     public String toString() {
         return this.getStatusIcon() + " " + description;
     }
