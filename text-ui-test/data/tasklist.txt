@@ -1,0 +1,4 @@
+T | 0 | read book
+T | 0 | pat burd
+D | 0 | buy catfood | Feb 12th 2025 5pm
+E | 1 | dance rehearsal | Mar 1st 2025 2pm | Mar 1st 2025 5pm
