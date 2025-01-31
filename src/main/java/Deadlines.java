@@ -1,11 +1,24 @@
+import java.time.LocalDateTime;
+
 public class Deadlines extends Task {
-    protected String by;
-    public Deadlines(String desc, String by) {
+    protected LocalDateTime by;
+
+    public Deadlines(String desc, String bystring) {
+        super(desc);
+        this.by = convert(bystring);
+    }
+
+    public Deadlines(String desc, LocalDateTime by) {
         super(desc);
         this.by = by;
     }
 
-    public Deadlines(String desc, boolean isDone, String by) {
+    public Deadlines(String desc, boolean isDone, String bystring) {
+        super(desc, isDone);
+        this.by = convert(bystring);
+    }
+
+    public Deadlines(String desc, boolean isDone, LocalDateTime by) {
         super(desc, isDone);
         this.by = by;
     }
@@ -26,12 +39,12 @@ public class Deadlines extends Task {
         if (isDone() == true) {
             isMarked = 1;
         }
-        return "E | " + isMarked + " | " + this.description + " | "
-            + this.by;
+        return "D | " + isMarked + " | " + this.description + " | "
+            + convertBack(this.by);
     }
     
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.by + ")";
+        return "[D]" + super.toString() + " (by: " + convertBack(this.by) + ")";
     }
 }

@@ -1,14 +1,29 @@
+
+import java.time.LocalDateTime;
+
 public class Events extends Task {
-    protected String from;
-    protected String to;
+    protected LocalDateTime from;
+    protected LocalDateTime to;
 
     public Events(String desc, String from, String to) {
+        super(desc);
+        this.from = convert(from);
+        this.to = convert(to);
+    }
+
+    public Events(String desc, LocalDateTime from, LocalDateTime to) {
         super(desc);
         this.from = from;
         this.to = to;
     }
 
     public Events(String desc, boolean isDone, String from, String to) {
+        super(desc, isDone);
+        this.from = convert(from);
+        this.to = convert(to);
+    }
+
+    public Events(String desc, boolean isDone, LocalDateTime from, LocalDateTime to) {
         super(desc, isDone);
         this.from = from;
         this.to = to;
@@ -31,11 +46,11 @@ public class Events extends Task {
             isMarked = 1;
         }
         return "E | " + isMarked + " | " + this.description + " | "
-            + this.from + " | " + this.to;
+            + convertBack(this.from) + " | " + convertBack(this.to);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + this.from + " to: " + this.to + ")";
+        return "[E]" + super.toString() + " (from: " + convertBack(this.from) + " to: " + convertBack(this.to) + ")";
     }
 }
