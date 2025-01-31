@@ -1,11 +1,12 @@
-run 1 lap
-todo run 1 lap
-deadline play 10 matches of mlbb /by Mon 3pm
-event date with miku /from Mon 2pm
-event date with miku /from Mon 2pm /to Mon 10pm
+read book
+todo read book
+todo pat burd
+deadline buy catfood /by Feb 12th 2025 5pm
+event dance rehearsal /from Mar 1st 2025 2pm
+event dance rehearsal /from Mar 1st 2025 2pm /to Mar 1st 2025 5pm
 list
 mark 1
 unmark 1
-mark 3
+mark 4
 list
 bye

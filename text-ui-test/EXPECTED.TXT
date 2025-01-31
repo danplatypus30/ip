@@ -1,3 +1,5 @@
+Directory created: ./data
+file created: ./data/tasklist.txt
 ____________________________________________________________
 Hello! I'm
  __  __ _ _          
@@ -9,47 +11,55 @@ Hello! I'm
 What can I do for you?
 ____________________________________________________________
 ____________________________________________________________
-Invalid input please enter todo, deadline or event
+Invalid input please enter list, todo, deadline or event
+Type "bye" to exit :)
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
-  [T][ ] run 1 lap
+  [T][ ] read book
 Now you have 1 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
-  [D][ ] play 10 matches of mlbb (by: Mon 3pm)
+  [T][ ] pat burd
 Now you have 2 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this task:
+  [D][ ] buy catfood (by: Feb 12th 2025 5pm)
+Now you have 3 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Invalid input, format: event <event> /from <date/time> /to <date/time>
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
-  [E][ ] date with miku (from: Mon 2pm to: Mon 10pm)
-Now you have 3 tasks in the list.
+  [E][ ] dance rehearsal (from: Mar 1st 2025 2pm to: Mar 1st 2025 5pm)
+Now you have 4 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
-1. [T][ ] run 1 lap
-2. [D][ ] play 10 matches of mlbb (by: Mon 3pm)
-3. [E][ ] date with miku (from: Mon 2pm to: Mon 10pm)
+1. [T][ ] read book
+2. [T][ ] pat burd
+3. [D][ ] buy catfood (by: Feb 12th 2025 5pm)
+4. [E][ ] dance rehearsal (from: Mar 1st 2025 2pm to: Mar 1st 2025 5pm)
 ____________________________________________________________
 ____________________________________________________________
 Nice! I've marked this task as done:
-  [T][X] run 1 lap
+  [T][X] read book
 ____________________________________________________________
 ____________________________________________________________
 OK, I've marked this task as not done yet:
-  [T][ ] run 1 lap
+  [T][ ] read book
 ____________________________________________________________
 ____________________________________________________________
 Nice! I've marked this task as done:
-  [E][X] date with miku (from: Mon 2pm to: Mon 10pm)
+  [E][X] dance rehearsal (from: Mar 1st 2025 2pm to: Mar 1st 2025 5pm)
 ____________________________________________________________
 ____________________________________________________________
-1. [T][ ] run 1 lap
-2. [D][ ] play 10 matches of mlbb (by: Mon 3pm)
-3. [E][X] date with miku (from: Mon 2pm to: Mon 10pm)
+1. [T][ ] read book
+2. [T][ ] pat burd
+3. [D][ ] buy catfood (by: Feb 12th 2025 5pm)
+4. [E][X] dance rehearsal (from: Mar 1st 2025 2pm to: Mar 1st 2025 5pm)
 ____________________________________________________________
 ____________________________________________________________
 Bye. Hope to see you again soon!

@@ -2,6 +2,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -183,7 +185,8 @@ public class Miku {
             } else if (user_in.contains("deadline ")) {
                 try {
                     String[] parts = user_in.substring(9).split("/by");
-                    Deadlines dd = new Deadlines(parts[0].trim(), parts[1].trim());
+                    LocalDateTime dt = Task.convert(parts[1].trim());
+                    Deadlines dd = new Deadlines(parts[0].trim(), dt);
                     list.add(dd);
 
                     // output
@@ -191,15 +194,20 @@ public class Miku {
                     System.out.println("  " + dd);
                     System.out.println("Now you have " + list.size() +  " tasks in the list.\n" + line);
                     writeListToFile(list);
+                } catch (DateTimeParseException dte) {
+                    System.out.println("<date/time> has to be MMM d(th) yyyy hr(pm/am)");
+                    System.out.println("e.g, Aug 22th 2025 5pm\n" + line);
                 } catch (Exception e) {
-                    System.out.println(line + "\nInvalid input, format: deadline <event> /by <date/time>\n" + line);
+                    System.out.println(line + "\nInvalid input, format: deadline <event> /by <date/time>");
                 }
             
             // event
             } else if (user_in.contains("event ")) {
                 try {
                     String[] parts = user_in.substring(6).split("/from|/to");
-                    Events ee = new Events(parts[0].trim(), parts[1].trim(), parts[2].trim());
+                    LocalDateTime dt = Task.convert(parts[1].trim());
+                    LocalDateTime dt2 = Task.convert(parts[2].trim());
+                    Events ee = new Events(parts[0].trim(), dt, dt2);
                     list.add(ee);
 
                     // output
@@ -207,6 +215,9 @@ public class Miku {
                     System.out.println("  " + ee);
                     System.out.println("Now you have " + list.size() +  " tasks in the list.\n" + line);
                     writeListToFile(list);
+                } catch (DateTimeParseException dte) {
+                    System.out.println("<date/time> has to be MMM d(th) yyyy hr(pm/am)");
+                    System.out.println("e.g, Aug 22th 2025 5pm\n" + line);
                 } catch (Exception e) {
                     System.out.println(line + "\nInvalid input, format: event <event> /from <date/time> /to <date/time>\n" + line);
                 }
