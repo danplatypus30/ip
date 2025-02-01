@@ -2,7 +2,9 @@ package duke;
 
 import java.io.IOException;
 
-
+/**
+ * Represents the main class of the program.
+ */
 public class Miku {
     private UI ui;
     private TaskList list;
