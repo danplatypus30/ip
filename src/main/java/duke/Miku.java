@@ -14,7 +14,7 @@ public class Miku {
         this.list = new TaskList();
         // define file and dir paths
         String dir = "./data";
-        String filepath = dir+ "/tasklist.txt";
+        String filepath = dir + "/tasklist.txt";
         Storage s = new Storage(dir, filepath, this.list);
         this.storage = s;
         this.ui = new UI(list, s);
