@@ -5,7 +5,13 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * JUnit test class for TaskList.
+ */
 public class TaskListTest {
+    /**
+     * Tests the TaskList class.
+     */
     @Test
     public void createTaskListTest() {
         TaskList tl = new TaskList();
@@ -14,7 +20,9 @@ public class TaskListTest {
         assertEquals(1, tl.size());
         assertEquals("[[T][ ] huggies]", tl.getList().toString());
     }
-
+    /**
+     * Tests the TaskList class.
+     */
     @Test
     public void deleteTaskList() {
         TaskList tl = new TaskList();

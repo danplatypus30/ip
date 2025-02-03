@@ -6,21 +6,41 @@ import java.io.IOException;
 import java.rmi.UnexpectedException;
 import java.util.Scanner;
 
+/**
+ * Storage class is responsible for reading and writing to the file.
+ * It reads the file and parses the data into Task object.
+ * It also writes the Task object into the file.
+ */
 public class Storage {
     private String dir;
     private String filepath;
     private TaskList list;
 
+    /**
+     * Constructor for Storage class
+     * @param dir
+     * @param filepath
+     * @param list
+     */
     public Storage(String dir, String filepath, TaskList list) {
         this.dir = dir;
         this.filepath = filepath;
         this.list = list;
     }
 
+    /**
+     * Getter for TaskList
+     * @return
+     */
     public TaskList getList() {
         return this.list;
     }
 
+    /**
+     * Reads the file and parses the data into Storage object.
+     * @return
+     * @throws IOException
+     */
     public Storage run() throws IOException {
         // create dir if it does not exist
         File directory = new File(dir);
@@ -64,6 +84,11 @@ public class Storage {
         return new Storage(dir, filepath, list);
     }
 
+    /**
+     * Writes the TaskList object into the file.
+     * @param list
+     * @throws IOException
+     */
     public static void writeListToFile(TaskList list) throws IOException {
         try (FileWriter writer = new FileWriter("./data/tasklist.txt")) {
             for (Task tasks : list.getList()) {

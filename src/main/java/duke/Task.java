@@ -5,11 +5,19 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.util.Locale;
 
+/**
+ * Represents a task in the task list.
+ */
 public class Task {
 
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Converts a string to a LocalDateTime object.
+     * @param datestring
+     * @return
+     */
     public static LocalDateTime convert(String datestring) {
         // "Aug 16th 2025 4pm"; sample input
 
@@ -31,6 +39,11 @@ public class Task {
         return dateTime;
     }
 
+    /**
+     * Returns the ordinal suffix of a day.
+     * @param day
+     * @return
+     */
     private static String getOrdinalSuffix(int day) {
         if (day >= 11 && day <= 13) {
             return "th"; // special case for 11-13
@@ -47,6 +60,11 @@ public class Task {
         }
     }
 
+    /**
+     * Converts a LocalDateTime object to a string.
+     * @param dateTime
+     * @return
+     */
     public static String convertBack(LocalDateTime dateTime) {
         // define DateTimeFormatter (before ordinal suffix)
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy ha", Locale.ENGLISH);
@@ -65,32 +83,61 @@ public class Task {
         return formattedDate.replaceFirst("\\d+", dayWithSuffix);
     }
 
+    /**
+     * Constructor for Task.
+     * @param description
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
+    /**
+     * Constructor for Task.
+     * @param description
+     * @param isDone
+     */
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
     }
 
+    /**
+     * Returns the description of the task.
+     * @return
+     */
     public String getStatusIcon() {
         return (isDone ? "[X]" : "[ ]"); // mark done task with X
     }
 
+    /**
+     * Returns if the task is done.
+     * @return
+     */
     public boolean isDone() {
         return isDone;
     }
 
+    /**
+     * Marks the task as done.
+     * @return
+     */
     public Task mark() {
         return new Task(this.description, true);
     }
 
+    /**
+     * Unmarks the task.
+     * @return
+     */
     public Task unmark() {
         return new Task(this.description, false);
     }
 
+    /**
+     * Returns the description of the task to be written to a file.
+     * @return
+     */
     public String toFileString() {
         int isMarked = 0;
         if (isDone() == true) {
@@ -99,6 +146,9 @@ public class Task {
         return "T | " + isMarked + " | " + this.description;
     }
 
+    /**
+     * Returns the description of the task for the user to read.
+     */
     @Override
     public String toString() {
         return this.getStatusIcon() + " " + description;

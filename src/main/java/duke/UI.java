@@ -3,16 +3,27 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
+/**
+ * UI class handles the interaction with the user.
+ */
 public class UI {
     public static String LINE = "____________________________________________________________";
     private TaskList list;
     private Storage storage;
 
+    /**
+     * Constructor for UI class.
+     * @param list
+     * @param storage
+     */
     public UI(TaskList list, Storage storage) {
         this.list = list;
         this.storage = storage;
     }
 
+    /**
+     * Shows the welcome message.
+     */
     public void showWelcome() {
         String logo = " __  __ _ _          \n"
                 + "|  \\/  (_) | ___   _ \n"
@@ -23,10 +34,16 @@ public class UI {
         System.out.println("What can I do for you?\n" + LINE);
     }
 
+    /**
+     * Displays a line
+     */
     public void line() {
         System.out.println(LINE);
     }
 
+    /**
+     * Runs a while loop that interacts with the user.
+     */
     public void interact() {
         Scanner sc = new Scanner(System.in);
         String user_in;

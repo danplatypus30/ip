@@ -10,6 +10,9 @@ public class Miku {
     private TaskList list;
     private Storage storage;
     
+    /**
+     * Constructor for Miku.
+     */
     public Miku() {
         this.list = new TaskList();
         // define file and dir paths
@@ -20,6 +23,9 @@ public class Miku {
         this.ui = new UI(list, s);
     }
 
+    /**
+     * Runs the program.
+     */
     public void run() {  
         try {
             this.storage = this.storage.run();
@@ -33,6 +39,10 @@ public class Miku {
         ui.interact();
     }
 
+    /**
+     * Main method.
+     * @param args
+     */
     public static void main(String[] args) {
         try {
             new Miku().run();

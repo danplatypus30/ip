@@ -7,7 +7,13 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * StorageTest class to test the Storage class.
+ */
 public class StorageTest {
+    /**
+     * Tests the fileIO method in the Storage class.
+     */
     @Test
     public void fileIOTest() {
         // define file and dir paths
