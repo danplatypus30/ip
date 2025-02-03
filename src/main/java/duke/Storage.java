@@ -37,9 +37,15 @@ public class Storage {
     }
 
     /**
-     * Reads the file and parses the data into Storage object.
-     * @return
-     * @throws IOException
+     * Executes the file operations required for reading and initializing the application's task storage.
+     * This method performs the following operations:
+     * - Creates the directory if it does not already exist.
+     * - Creates a file within the directory if the file does not already exist.
+     * - Reads the contents of the file and parses each line into Task objects to populate the TaskList.
+     *
+     * @return a new Storage instance initialized with the directory path, file path, and populated TaskList.
+     * @throws IOException if the directory cannot be created, the file cannot be created,
+     *                     the file cannot be read, or an unexpected error occurs during parsing.
      */
     public Storage run() throws IOException {
         // create dir if it does not exist

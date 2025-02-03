@@ -9,7 +9,7 @@ public class Miku {
     private UI ui;
     private TaskList list;
     private Storage storage;
-    
+
     /**
      * Constructor for Miku.
      */
@@ -26,7 +26,7 @@ public class Miku {
     /**
      * Runs the program.
      */
-    public void run() {  
+    public void run() {
         try {
             this.storage = this.storage.run();
             this.list = storage.getList();

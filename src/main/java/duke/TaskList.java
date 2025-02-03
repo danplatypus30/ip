@@ -1,6 +1,5 @@
 package duke;
-import java.io.FileWriter;
-import java.io.IOException;
+
 import java.rmi.UnexpectedException;
 import java.util.ArrayList;
 
@@ -61,7 +60,7 @@ public class TaskList {
         this.list.set(index, elem);
         return this;
     }
-    
+
     /**
      * Adds a task to the list.
      * @param t
@@ -83,10 +82,17 @@ public class TaskList {
     }
 
     /**
-     * Converts a string to a TaskList.
-     * @param line
-     * @return
-     * @throws UnexpectedException
+     * Parses a single line in the form of a task string and adds the corresponding task
+     * to the current TaskList. The task can be of type ToDos, Deadlines, or Events.
+     *
+     * @param line The string representation of the task, where fields are separated by '|'.
+     *             Expected format:
+     *             - For ToDos: "T | marked_status | description"
+     *             - For Deadlines: "D | marked_status | description | by"
+     *             - For Events: "E | marked_status | description | from | to"
+     *             The marked_status is "1" for done, "0" for not done.
+     * @return A new TaskList object with the parsed task added to the existing list of tasks.
+     * @throws UnexpectedException If the input string is malformed or contains an unknown task type.
      */
     public TaskList parseTaskLine(String line) throws UnexpectedException {
         // split the line using '|' as a delimiter and trim spaces
@@ -113,7 +119,7 @@ public class TaskList {
             String to = parts[4].trim();
             Events ee = new Events(description, isMarked, from, to);
             list.add(ee);
-        // ensure valid type 
+        // ensure valid type
         } else {
             throw new UnexpectedException("Unknown task type: " + type);
         }

@@ -77,7 +77,7 @@ public class Deadlines extends Task {
         return "D | " + isMarked + " | " + this.description + " | "
             + convertBack(this.by);
     }
-    
+
     /**
      * Convert a Deadline to a string to be displayed to the user.
      */

@@ -14,6 +14,25 @@ public class Task {
     protected boolean isDone;
 
     /**
+     * Constructor for Task.
+     * @param description
+     */
+    public Task(String description) {
+        this.description = description;
+        this.isDone = false;
+    }
+
+    /**
+     * Constructor for Task.
+     * @param description
+     * @param isDone
+     */
+    public Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
+    }
+
+    /**
      * Converts a string to a LocalDateTime object.
      * @param datestring
      * @return
@@ -25,8 +44,7 @@ public class Task {
         datestring = datestring.replaceAll("(\\d+)(st|nd|rd|th)", "$1");
 
         // format DateTimeFormatter
-        DateTimeFormatter formatter
-                = new DateTimeFormatterBuilder()
+        DateTimeFormatter formatter = new DateTimeFormatterBuilder()
                         .parseCaseInsensitive()
                         .appendPattern("MMM d yyyy ha")
                         .toFormatter(Locale.ENGLISH);
@@ -47,16 +65,16 @@ public class Task {
     private static String getOrdinalSuffix(int day) {
         if (day >= 11 && day <= 13) {
             return "th"; // special case for 11-13
-
-                }switch (day % 10) {
-            case 1:
-                return "st";
-            case 2:
-                return "nd";
-            case 3:
-                return "rd";
-            default:
-                return "th";
+        }
+        switch (day % 10) {
+        case 1:
+            return "st";
+        case 2:
+            return "nd";
+        case 3:
+            return "rd";
+        default:
+            return "th";
         }
     }
 
@@ -81,25 +99,6 @@ public class Task {
 
         // replace day in formatted date
         return formattedDate.replaceFirst("\\d+", dayWithSuffix);
-    }
-
-    /**
-     * Constructor for Task.
-     * @param description
-     */
-    public Task(String description) {
-        this.description = description;
-        this.isDone = false;
-    }
-
-    /**
-     * Constructor for Task.
-     * @param description
-     * @param isDone
-     */
-    public Task(String description, boolean isDone) {
-        this.description = description;
-        this.isDone = isDone;
     }
 
     /**
