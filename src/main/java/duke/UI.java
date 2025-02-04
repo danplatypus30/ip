@@ -173,13 +173,13 @@ public class UI {
             // find
             } else if (userIn.startsWith("find")) {
                 line();
-                String[] user_ins = userIn.split(" ");
-                String userDesc = user_ins[1];
+                String[] userIns = userIn.split(" ");
+                String userDesc = userIns[1];
                 int i = 1;
                 int count = 0;
                 while (count < list.size()) {
                     String desc = list.getList().get(count).toString();
-                    if (desc.contains(userDesc)){
+                    if (desc.contains(userDesc)) {
                         System.out.println((i) + ". " + list.getList().get(count));
                         i++;
                     }
