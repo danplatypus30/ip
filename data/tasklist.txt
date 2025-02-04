@@ -2,3 +2,4 @@ T | 1 | read book
 T | 0 | pat burd
 D | 0 | buy catfood | Feb 12th 2025 5pm
 E | 1 | mlbb finals | Feb 3rd 2025 6pm | Feb 4th 2025 5pm
+D | 0 | burding w shiro | Jan 15th 2026 7pm
