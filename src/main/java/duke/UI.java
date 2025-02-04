@@ -43,7 +43,7 @@ public class UI {
                 line();
 
             // unmark
-            } else if (user_in.contains("unmark ")) {
+            } else if (user_in.startsWith("unmark ")) {
                 try {
                     // get task num
                     String[] user_ins = user_in.split(" ");
@@ -59,7 +59,7 @@ public class UI {
                 }
             
             // mark
-            } else if (user_in.contains("mark ")) {
+            } else if (user_in.startsWith("mark ")) {
                 try {
                     // get task num
                     String[] user_ins = user_in.split(" ");
@@ -75,7 +75,7 @@ public class UI {
                 }
 
             // todo
-            } else if (user_in.contains("todo")) {
+            } else if (user_in.startsWith("todo")) {
                 try {
                     if (user_in.substring(4).isEmpty()) {
                         throw new EmptyStringException("String cannot be empty");
@@ -95,7 +95,7 @@ public class UI {
                 }
             
             // deadline
-            } else if (user_in.contains("deadline ")) {
+            } else if (user_in.startsWith("deadline ")) {
                 try {
                     String[] parts = user_in.substring(9).split("/by");
                     LocalDateTime dt = Task.convert(parts[1].trim());
@@ -115,7 +115,7 @@ public class UI {
                 }
             
             // event
-            } else if (user_in.contains("event ")) {
+            } else if (user_in.startsWith("event ")) {
                 try {
                     String[] parts = user_in.substring(6).split("/from|/to");
                     LocalDateTime dt = Task.convert(parts[1].trim());
@@ -137,7 +137,7 @@ public class UI {
                 }
 
             // delete
-            } else if (user_in.contains("delete ")) {
+            } else if (user_in.startsWith("delete ")) {
                 try {
                     // get task num
                     String[] user_ins = user_in.split(" ");
@@ -152,14 +152,31 @@ public class UI {
                 } catch (Exception e) {
                     System.out.println(LINE + "\nInvalid input, format: delete <index in list>\n" + LINE);
                 }
-            
+
+            // find
+            } else if (user_in.startsWith("find")) {
+                line();
+                String[] user_ins = user_in.split(" ");
+                String userDesc = user_ins[1];
+                int i = 1;
+                int count = 0;
+                while (count < list.size()) {
+                    String desc = list.getList().get(count).toString();
+                    if (desc.contains(userDesc)){
+                        System.out.println((i) + ". " + list.getList().get(count));
+                        i++;
+                    }
+                    count++;
+                }
+                line();
+
             // bye
-            } else if (user_in.equals("bye") == false) {
+            } else if (user_in.startsWith("bye") == false) {
                 // invalid input
-                System.out.println(LINE + "\nInvalid input please enter list, todo, deadline or event");
+                System.out.println(LINE + "\nInvalid input please enter list, todo, deadline, event or find");
                 System.out.println("Type \"bye\" to exit :)\n" + LINE);
             }
-        } while (user_in.equals("bye") == false);
+        } while (user_in.startsWith("bye") == false);
 
 
         System.out.println(LINE + "\nBye. Hope to see you again soon!\n" + LINE);
