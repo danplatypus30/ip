@@ -2,13 +2,19 @@ package duke;
 
 import java.io.IOException;
 
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+
 /**
  * Represents the main class of the program.
  */
-public class Miku {
-    private UI ui;
+public class Miku extends Application {
     private TaskList list;
     private Storage storage;
+    private Duke duke;
 
     /**
      * Constructor for Miku.
@@ -20,7 +26,6 @@ public class Miku {
         String filepath = dir + "/tasklist.txt";
         Storage s = new Storage(dir, filepath, this.list);
         this.storage = s;
-        this.ui = new UI(list, s);
     }
 
     /**
@@ -34,18 +39,28 @@ public class Miku {
             System.out.println(e.getMessage());
             return;
         }
-        this.ui = new UI(list, storage);
-        ui.showWelcome();
-        ui.interact();
     }
 
     /**
-     * Main method.
-     * @param args
+     * Main method of the program.
      */
-    public static void main(String[] args) {
+    @Override
+    public void start(Stage stage) {
         try {
-            new Miku().run();
+            // setup the file IO
+            run();
+
+            // Initialize Duke after running the storage
+            this.duke = new Duke(this.list);
+
+            FXMLLoader fxmlLoader = new FXMLLoader(Miku.class.getResource("/view/MainWindow.fxml"));
+            AnchorPane ap = fxmlLoader.load();
+            Scene scene = new Scene(ap);
+            stage.setScene(scene);
+            fxmlLoader.<MainWindow>getController().setDuke(this.duke); // inject the Duke instance
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         } catch (Exception e) {
             System.out.println(e);
         }
