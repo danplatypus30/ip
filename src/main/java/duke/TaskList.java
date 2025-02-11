@@ -1,6 +1,5 @@
 package duke;
 
-import java.rmi.UnexpectedException;
 import java.util.ArrayList;
 
 /**
@@ -94,11 +93,11 @@ public class TaskList {
      * @return A new TaskList object with the parsed task added to the existing list of tasks.
      * @throws UnexpectedException If the input string is malformed or contains an unknown task type.
      */
-    public TaskList parseTaskLine(String line) throws UnexpectedException {
+    public TaskList parseTaskLine(String line) throws UnsupportedOperationException {
         // split the line using '|' as a delimiter and trim spaces
         String[] parts = line.split("\\|");
         if (parts.length > 5 || parts.length < 3) {
-            throw new UnexpectedException("invalid task: " + line);
+            throw new UnsupportedOperationException("invalid task: " + line);
         }
 
         // extract variables
@@ -121,7 +120,7 @@ public class TaskList {
             list.add(ee);
         // ensure valid type
         } else {
-            throw new UnexpectedException("Unknown task type: " + type);
+            throw new UnsupportedOperationException("Unknown task type: " + type);
         }
         return new TaskList(list);
     }
