@@ -84,8 +84,6 @@ public class Storage {
             }
         } catch (FileNotFoundException e) {
             throw new IOException("file not found: " + file.getAbsolutePath());
-        } catch (UnexpectedException e) {
-            throw new IOException(e.getMessage());
         }
         return new Storage(dir, filepath, list);
     }
