@@ -3,7 +3,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.rmi.UnexpectedException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -34,6 +35,31 @@ public class Storage {
      */
     public TaskList getList() {
         return this.list;
+    }
+
+    /**
+     * Writes a double 0.0 to the first line of the file
+     * @throws IOException
+     */
+    private void writeFirstLine() throws IOException {
+        // write a double 0.0 to first line of tasklist.txt
+        try {
+            // Read the existing content of the file
+            File file = new File(filepath);
+            StringBuilder content = new StringBuilder();
+            try (Scanner scanner = new Scanner(file)) {
+                while (scanner.hasNextLine()) {
+                    content.append(scanner.nextLine()).append(System.lineSeparator());
+                }
+            }
+    
+            // Write 0.0 to the first line and append the existing content
+            try (FileWriter writer = new FileWriter(filepath)) {
+                writer.write("0.0" + System.lineSeparator() + content.toString());
+            }
+        } catch (IOException e) {
+            throw e;
+        }
     }
 
     /**
@@ -74,8 +100,22 @@ public class Storage {
             }
         }
 
+        double newExpenses = 0.0;
+        boolean writeZero = false;
         // read the file contents
         try (Scanner scanner = new Scanner(file)) {
+            if (scanner.hasNextLine()) {
+                String firstLine = scanner.nextLine();
+                
+                try {
+                    newExpenses = Double.parseDouble(firstLine);
+                } catch (NumberFormatException e) {
+                    // If the first line is not a double, add a first line with double 0.0
+                    newExpenses = 0.0;
+                    writeZero = true;
+                }
+            }
+
             while (scanner.hasNextLine()) {
                 // parse the data into Task object
                 String line = scanner.nextLine();
@@ -84,7 +124,12 @@ public class Storage {
         } catch (FileNotFoundException e) {
             throw new IOException("file not found: " + file.getAbsolutePath());
         }
-        return new Storage(dir, filepath, list);
+
+        if (writeZero) {
+            this.writeFirstLine();
+        }
+
+        return new Storage(dir, filepath, list.addExpenses(newExpenses));
     }
 
     /**
@@ -94,6 +139,8 @@ public class Storage {
      */
     public static void writeListToFile(TaskList list) throws IOException {
         try (FileWriter writer = new FileWriter("./data/tasklist.txt")) {
+            writer.write(list.getExpenses() + System.lineSeparator());
+
             for (Task tasks : list.getList()) {
                 writer.write(tasks.toFileString() + System.lineSeparator());
             }

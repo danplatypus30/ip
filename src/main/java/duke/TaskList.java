@@ -3,31 +3,44 @@ package duke;
 import java.util.ArrayList;
 
 /**
- * Represents a list of tasks.
+ * Represents a list of tasks
  */
 public class TaskList {
     private ArrayList<Task> list;
+    private double expenses;
 
     /**
-     * Constructs an empty TaskList.
+     * Constructs an empty TaskList
      */
     public TaskList() {
         this.list = new ArrayList<Task>();
+        this.expenses = 0.0;
     }
 
     /**
-     * Constructs a TaskList with the given list of tasks.
+     * Constructs a TaskList with the given list of tasks
      *
-     * @param list The list of tasks.
+     * @param list The list of tasks
      */
     public TaskList(ArrayList<Task> list) {
         this.list = list;
+        this.expenses = 0.0;
     }
 
     /**
-     * Constructs a TaskList with the same tasks as the given TaskList.
+     * Constructs a TaskList with the given list of tasks and expenses
      *
-     * @param tlist The TaskList to copy.
+     * @param list The list of tasks.
+     */
+    public TaskList(ArrayList<Task> list, double expenses) {
+        this.list = list;
+        this.expenses = expenses;
+    }
+
+    /**
+     * Constructs a TaskList with the same tasks as the given TaskList
+     *
+     * @param tlist The TaskList to copy
      */
     public TaskList(TaskList tlist) {
         this.list = tlist.list;
@@ -39,6 +52,14 @@ public class TaskList {
      */
     public ArrayList<Task> getList() {
         return list;
+    }
+
+    /**
+     * Returns the expenses of the TaskList.
+     * @return
+     */
+    public double getExpenses() {
+        return this.expenses; 
     }
 
     /**
@@ -123,5 +144,14 @@ public class TaskList {
             throw new UnsupportedOperationException("Unknown task type: " + type);
         }
         return new TaskList(list);
+    }
+
+    /**
+     * Adds expenses to the TaskList.
+     * @param expenses
+     * @return
+     */
+    public TaskList addExpenses(double expenses) {
+        return new TaskList(this.list, expenses);
     }
 }

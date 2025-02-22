@@ -33,6 +33,27 @@ public class Task {
     }
 
     /**
+     * Returns if any expenses in the task, if not, return 0.0
+     * @return
+     */
+    public double getExpenses() {
+        double expenses = 0.0;
+        // Check if the input contains /expenses and extract the value
+        if (this.description.contains("/expenses")) {
+            try {
+                String[] parts = this.description.split("/expenses");
+                expenses = Double.parseDouble(parts[1].trim().split("\\s+")[0]);
+                if (expenses < 0.0) {
+                    return -1.0;
+                }
+            } catch (NumberFormatException e) {
+                return -1.0;
+            }
+        }
+        return expenses;
+    }
+
+    /**
      * Converts a string to a LocalDateTime object.
      * @param datestring
      * @return
