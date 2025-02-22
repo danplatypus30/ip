@@ -54,7 +54,6 @@ public class Storage {
             if (directory.mkdirs()) {
                 System.out.println("Directory created: " + dir);
             } else {
-                //System.out.println("Failed to create directory: " + dir);
                 throw new IOException("Failed to create directory: " + dir); // exit if create dir fails
             }
         }
