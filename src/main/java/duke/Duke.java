@@ -1,5 +1,6 @@
 package duke;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
@@ -7,11 +8,12 @@ import java.time.format.DateTimeParseException;
  * Program that will respond to the user
  */
 public class Duke {
+
     private TaskList list;
 
     /**
      * Constructor for Duke.
-     * 
+     *
      * @param list
      * @param storage
      */
@@ -28,6 +30,7 @@ public class Duke {
 
     /**
      * Generates output for list command.
+     *
      * @return
      */
     private String list() {
@@ -39,11 +42,13 @@ public class Duke {
         if (list.size() == 0) {
             str += "No tasks in the list\n";
         }
+        str += "Current expenses is $" + list.getExpenses() + "\n";
         return str;
     }
 
     /**
      * Generate output for unmark command
+     *
      * @param userIn
      * @return
      */
@@ -67,6 +72,7 @@ public class Duke {
 
     /**
      * Generates output for mark command
+     *
      * @param userIn
      * @return
      */
@@ -90,6 +96,7 @@ public class Duke {
 
     /**
      * Generate output for todo command
+     *
      * @param userIn
      * @return
      */
@@ -117,6 +124,7 @@ public class Duke {
 
     /**
      * Generate output for deadline command
+     *
      * @param userIn
      * @return
      */
@@ -146,6 +154,7 @@ public class Duke {
 
     /**
      * Generate output for event command
+     *
      * @param userIn
      * @return
      */
@@ -176,16 +185,18 @@ public class Duke {
 
     /**
      * Generate output for delete command
+     *
      * @param userIn
      * @return
      */
-    private String delete(String userIn) {
+    private String delete(String userIn, double expenses) {
         try {
             // get task num
             String[] userIns = userIn.split(" ");
             int userInNum = Integer.parseInt(userIns[1]) - 1;
             Task tt = list.getList().get(userInNum);
             list = list.remove(userInNum);
+            list = list.addExpenses(expenses - tt.getExpenses());
 
             // output
             String str = "";
@@ -200,6 +211,7 @@ public class Duke {
 
     /**
      * Generate output for find command
+     *
      * @param userIn
      * @return
      */
@@ -222,6 +234,7 @@ public class Duke {
 
     /**
      * Generate output for invalid command
+     *
      * @return
      */
     private String invalid() {
@@ -233,29 +246,102 @@ public class Duke {
     }
 
     /**
+     * Capture the expenses for this user input
+     * It can only be positive, negative values are invalid
+     * Keep track of expenses, will not account for earnings
+     * @param userIn
+     * @return
+     */
+    private double getExpenses(String userIn, double expenses) {
+        // Check if the input contains /expenses and extract the value
+        if (userIn.contains("/expenses")) {
+            try {
+                String[] parts = userIn.split("/expenses");
+                expenses = Double.parseDouble(parts[1].trim().split("\\s+")[0]);
+                if (expenses < 0.0) {
+                    return -1.0;
+                }
+            } catch (NumberFormatException e) {
+                return -1.0;
+            }
+        }
+        return expenses;
+    }
+
+    /**
+     * Save the expenses to the list and write to file
+     * @param expenses
+     * @return
+     */
+    private String saveExpenses (double expenses, String output) {
+        list = list.addExpenses(expenses);
+        try {
+            Storage.writeListToFile(list);
+        } catch (IOException e) {
+            return "Error writing to file\n";
+        }
+        return output;
+    }
+
+    /**
      * Runs a while loop that interacts with the user.
      */
     public String interact(String userIn) {
-        if (userIn.equals("list")) {
-            return this.list();
-        } else if (userIn.startsWith("unmark")) {
-            return this.unmark(userIn);
-        } else if (userIn.startsWith("mark")) {
-            return this.mark(userIn);
-        } else if (userIn.startsWith("todo")) {
-            return this.todo(userIn);
-        } else if (userIn.startsWith("deadline")) {
-            return this.deadline(userIn);
-        } else if (userIn.startsWith("event")) {
-            return this.event(userIn);
-        } else if (userIn.startsWith("delete")) {
-            return this.delete(userIn);
-        } else if (userIn.startsWith("find")) {
-            return this.find(userIn);
-        } else if (userIn.startsWith("bye") == false) {
-            return this.invalid();
+        // handle null and whitespace inputs
+        if (userIn == null || userIn.trim().isEmpty()) {
+            return this.invalid(); // Handle empty input
         }
-        return "Bye. Hope to see you again soon!\n";
+
+        // Trim input and extract the first word as command
+        // split("\\s+") splits by one or more whitespace characters
+        // will capture entire input if no space
+        // limit 2 means maximum 2 resulting array elements, one split only
+        String command = userIn.trim().split("\\s+", 2)[0];
+        String output = "";
+        double expenses = this.list.getExpenses();
+        if (expenses == -1.0) {
+            return "Invalid input, format: <command> /expenses <value, in double format, >= 0.0>\n";
+        }
+
+        switch (command) {
+            case "list":
+                output = this.list();
+                break;
+            case "unmark":
+                output = this.unmark(userIn);
+                break;
+            case "mark":
+                output = this.mark(userIn);
+                break;
+            case "todo":
+                output = this.todo(userIn);
+                expenses += this.getExpenses(userIn, expenses);
+                break;
+            case "deadline":
+                output = this.deadline(userIn);
+                expenses += this.getExpenses(userIn, expenses);
+                break;
+            case "event":
+                output = this.event(userIn);
+                expenses += this.getExpenses(userIn, expenses);
+                break;
+            case "delete":
+                output = this.delete(userIn, expenses);
+                return output;
+            case "find":
+                output = this.find(userIn);
+                break;
+            case "bye":
+                output = "Bye. Hope to see you again soon!\n";
+                break;
+            default:
+                output = this.invalid();
+        }
+
+        // Add expenses to the list and write to file
+        saveExpenses(expenses, output);
+
+        return output;
     }
 
     /**
