@@ -91,6 +91,8 @@ public class Duke {
                 if (userIn.substring(4).isEmpty()) {
                     throw new EmptyStringException("String cannot be empty");
                 }
+                // assertion
+                assert userIn.substring(0,4).equals("todo");
                 ToDos td = new ToDos(userIn.substring(5));
                 list = list.add(td);
 
@@ -114,6 +116,9 @@ public class Duke {
                 LocalDateTime dt = Task.convert(parts[1].trim());
                 Deadlines dd = new Deadlines(parts[0].trim(), dt);
                 list = list.add(dd);
+
+                // assertion
+                assert userIn.substring(0,9).equals("deadline");
 
                 // output
                 String str = "";
@@ -140,6 +145,9 @@ public class Duke {
                 Events ee = new Events(parts[0].trim(), dt, dt2);
                 list = list.add(ee);
 
+                // assertion
+                assert userIn.substring(0,6).equals("event");
+
                 // output
                 String str = "";
                 str += "Got it. I've added this task:\n";
@@ -164,6 +172,9 @@ public class Duke {
                 int userInNum = Integer.parseInt(userIns[1]) - 1;
                 Task tt = list.getList().get(userInNum);
                 list = list.remove(userInNum);
+
+                // assertion
+                assert userInNum >= 0;
 
                 // output
                 String str = "";
