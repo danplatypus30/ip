@@ -85,7 +85,7 @@ public class Duke {
 
             // output
             String str = "";
-            str += "Nice! I've marked this task as done:";
+            str += "Nice! I've marked this task as done:\n";
             str += "  " + list.getList().get(userInNum) + "\n";
             Storage.writeListToFile(list);
             return str;
