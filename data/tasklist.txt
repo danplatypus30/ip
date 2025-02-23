@@ -1,4 +1,4 @@
-0.0
+84.8
 T | 1 | read book
 T | 0 | pat burd
 D | 0 | buy catfood | Feb 12th 2025 5pm
