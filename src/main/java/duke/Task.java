@@ -105,7 +105,7 @@ public class Task {
      */
     public static String convertBack(LocalDateTime dateTime) {
         // define DateTimeFormatter (before ordinal suffix)
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy ha", Locale.ENGLISH);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yy h:mm a", Locale.ENGLISH);
 
         // format to string
         String formattedDate = dateTime.format(formatter);
@@ -113,12 +113,8 @@ public class Task {
         // Convert AM/PM to lowercase
         formattedDate = formattedDate.replaceAll("AM", "am").replaceAll("PM", "pm");
 
-        // append ordinal suffix
-        int day = dateTime.getDayOfMonth();
-        String dayWithSuffix = day + getOrdinalSuffix(day);
-
         // replace day in formatted date
-        return formattedDate.replaceFirst("\\d+", dayWithSuffix);
+        return formattedDate;
     }
 
     /**

@@ -1,5 +1,5 @@
 84.8
 T | 1 | read book
-D | 0 | buy catfood | Feb 12th 2025 5pm
-E | 1 | mlbb finals | Feb 3rd 2025 6pm | Feb 4th 2025 5pm
-D | 1 | burding w shiro | Jan 15th 2026 7pm
+D | 0 | buy catfood | 02/12/25 5:00 pm
+E | 1 | mlbb finals | 02/03/25 6:00 pm | 02/04/25 5:00 pm
+D | 1 | burding w shiro | 01/15/26 7:00 pm

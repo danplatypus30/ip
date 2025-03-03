@@ -58,6 +58,8 @@ public class Miku extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(this.duke); // inject the Duke instance
+            // Set the title of the stage 
+            stage.setTitle("Miku Helper");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
