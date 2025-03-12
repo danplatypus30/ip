@@ -1,5 +1,9 @@
-84.8
-T | 1 | read book
+16.5
+T | 0 | read book
 D | 0 | buy catfood | 02/12/25 5:00 pm
-E | 1 | mlbb finals | 02/03/25 6:00 pm | 02/04/25 5:00 pm
-D | 1 | burding w shiro | 01/15/26 7:00 pm
+E | 0 | mlbb finals | 02/03/25 6:00 pm | 02/05/25 7:00 pm
+T | 0 | buy dogfood /expenses 2.00
+D | 0 | hehahaha | 02/03/25 4:00 pm
+T | 0 | buy drinks /expenses 2.0
+D | 0 | feed cat /expenses 5.25 | 01/07/25 5:00 pm
+E | 0 | feed cat /expenses 5.25 | 01/07/25 5:00 pm | 01/07/25 6:00 pm

@@ -273,7 +273,7 @@ public class Duke {
      * @param expenses
      * @return
      */
-    private String saveExpenses (double expenses, String output) {
+    private String saveExpenses(double expenses, String output) {
         list = list.addExpenses(expenses);
         try {
             Storage.writeListToFile(list);
@@ -304,38 +304,38 @@ public class Duke {
         }
 
         switch (command) {
-            case "list":
-                output = this.list();
-                break;
-            case "unmark":
-                output = this.unmark(userIn);
-                break;
-            case "mark":
-                output = this.mark(userIn);
-                break;
-            case "todo":
-                output = this.todo(userIn);
-                expenses += this.getExpenses(userIn, expenses);
-                break;
-            case "deadline":
-                output = this.deadline(userIn);
-                expenses += this.getExpenses(userIn, expenses);
-                break;
-            case "event":
-                output = this.event(userIn);
-                expenses += this.getExpenses(userIn, expenses);
-                break;
-            case "delete":
-                output = this.delete(userIn, expenses);
-                return output;
-            case "find":
-                output = this.find(userIn);
-                break;
-            case "bye":
-                output = "Bye. Hope to see you again soon!\n";
-                break;
-            default:
-                output = this.invalid();
+        case "list":
+            output = this.list();
+            break;
+        case "unmark":
+            output = this.unmark(userIn);
+            break;
+        case "mark":
+            output = this.mark(userIn);
+            break;
+        case "todo":
+            output = this.todo(userIn);
+            expenses += this.getExpenses(userIn, expenses);
+            break;
+        case "deadline":
+            output = this.deadline(userIn);
+            expenses += this.getExpenses(userIn, expenses);
+            break;
+        case "event":
+            output = this.event(userIn);
+            expenses += this.getExpenses(userIn, expenses);
+            break;
+        case "delete":
+            output = this.delete(userIn, expenses);
+            return output;
+        case "find":
+            output = this.find(userIn);
+            break;
+        case "bye":
+            output = "Bye. Hope to see you again soon!\n";
+            break;
+        default:
+            output = this.invalid();
         }
 
         // Add expenses to the list and write to file

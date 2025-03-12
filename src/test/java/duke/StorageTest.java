@@ -22,7 +22,7 @@ public class StorageTest {
             s = s.run();
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            fail();
+            fail(e);
         }
     }
 }

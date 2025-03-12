@@ -3,8 +3,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -52,7 +50,7 @@ public class Storage {
                     content.append(scanner.nextLine()).append(System.lineSeparator());
                 }
             }
-    
+
             // Write 0.0 to the first line and append the existing content
             try (FileWriter writer = new FileWriter(filepath)) {
                 writer.write("0.0" + System.lineSeparator() + content.toString());
@@ -106,7 +104,7 @@ public class Storage {
         try (Scanner scanner = new Scanner(file)) {
             if (scanner.hasNextLine()) {
                 String firstLine = scanner.nextLine();
-                
+
                 try {
                     newExpenses = Double.parseDouble(firstLine);
                 } catch (NumberFormatException e) {

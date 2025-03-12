@@ -15,7 +15,7 @@ Example:
 
 ```
 Got it. I've added this task:
-[D][ ] feed cat /expenses 5.25 (by: Jan 7th 2025 5pm)
+[D][ ] feed cat /expenses 5.25 (by: 01/07/25 5:00pm)
 Now you have 7 tasks in this list.
 ```
 
@@ -45,7 +45,7 @@ Example:
 
 ```
 Got it. I've added this task:
-[E][ ] feed cat /expenses 5.25 (from: Jan 7th 2025 5pm to: Jan 7th 2025 6pm)
+[E][ ] feed cat /expenses 5.25 (from: 01/07/25 5:00pm to: 01/07/25 6:00pm)
 Now you have 7 tasks in this list.
 ```
 
@@ -58,8 +58,8 @@ Example:
 
 ```
 1. [T][ ] feed burd /expenses 5.00
-2. [D][X] feed dog /expenses 5.00 (by: Jan 7th 2025 5pm)
-3. [E][ ] feed cat /expenses 5.00 (from: Jan 7th 2025 5pm to: Jan 7th 2025 6pm)
+2. [D][X] feed dog /expenses 5.00 (by: 01/07/25 5:00pm)
+3. [E][ ] feed cat /expenses 5.00 (from: 01/07/25 5:00pm to: 01/07/25 6:00pm)
 Current expenses is $15.00
 ```
 

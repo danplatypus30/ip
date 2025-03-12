@@ -59,7 +59,7 @@ public class TaskList {
      * @return
      */
     public double getExpenses() {
-        return this.expenses; 
+        return this.expenses;
     }
 
     /**

@@ -3,6 +3,7 @@ package duke;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
+import java.time.format.DateTimeParseException;
 import java.util.Locale;
 
 /**
@@ -60,20 +61,29 @@ public class Task {
      */
     public static LocalDateTime convert(String datestring) {
         // "Aug 16th 2025 4pm"; sample input
+        // 02/12/25 5:00 pm ; alternative sample input
 
+        LocalDateTime dateTime;
         // remove 'st', 'nd', 'rd', 'th' from the day
-        datestring = datestring.replaceAll("(\\d+)(st|nd|rd|th)", "$1");
+        try {
+            datestring = datestring.replaceAll("(\\d+)(st|nd|rd|th)", "$1");
 
-        // format DateTimeFormatter
-        DateTimeFormatter formatter = new DateTimeFormatterBuilder()
-                        .parseCaseInsensitive()
-                        .appendPattern("MMM d yyyy ha")
-                        .toFormatter(Locale.ENGLISH);
+            // format DateTimeFormatter
+            DateTimeFormatter formatter = new DateTimeFormatterBuilder()
+                            .parseCaseInsensitive()
+                            .appendPattern("MMM d yyyy ha")
+                            .toFormatter(Locale.ENGLISH);
 
-        // parse string into LocalDateTime
-        LocalDateTime dateTime = LocalDateTime.parse(datestring, formatter);
-        // will throw DateTimeParseException if text cannot be parsed
-
+            // parse string into LocalDateTime
+            dateTime = LocalDateTime.parse(datestring, formatter);
+            // will throw DateTimeParseException if text cannot be parsed
+        } catch (DateTimeParseException e) {
+            DateTimeFormatter formatter = new DateTimeFormatterBuilder()
+                            .parseCaseInsensitive()
+                            .appendPattern("MM/dd/yy h:mm a")
+                            .toFormatter(Locale.ENGLISH);
+            dateTime = LocalDateTime.parse(datestring, formatter);
+        }
         return dateTime;
     }
 
